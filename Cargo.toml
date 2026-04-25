@@ -1,0 +1,14 @@
+[package]
+name = "bilge-defmt"
+version = "0.1.0-pre"
+edition = "2024"
+authors = ["Johannes Cornelis Draaijer <jcdra1@gmail.com>"]
+license = "MIT OR Apache-2.0"
+description = "A derive macro that implements defmt::Format for your bilge structs"
+homepage = "https://github.com/datdenkikniet/bilge-defmt"
+keywords = ["bilge", "defmt"]
+categories = ["embedded", "no-std"]
+readme = "README.md"
+
+[dependencies]
+bilge-defmt-impl = { version = "0.1.0-pre", path = "./bilge-defmt-impl" }
