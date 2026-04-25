@@ -1,5 +1,5 @@
 use proc_macro_error2::abort_call_site;
-use proc_macro2::TokenStream;
+use proc_macro2::{Span, TokenStream};
 use quote::quote;
 use syn::{Data, DeriveInput, Fields, Ident};
 
@@ -13,7 +13,7 @@ pub(crate) fn format_bits(item: TokenStream) -> TokenStream {
         Data::Union(_) => unreachable!(),
     };
 
-    let fmt_impl = match struct_data.fields {
+    let (fmt_string, calls) = match struct_data.fields {
         Fields::Named(fields) => {
             let mut fmt_string = name_str.to_string();
             fmt_string.push_str(" {{ ");
@@ -36,9 +36,7 @@ pub(crate) fn format_bits(item: TokenStream) -> TokenStream {
 
             fmt_string.push_str("}}");
 
-            quote! {
-                ::defmt::write!(fmt, #fmt_string, #(#calls)*)
-            }
+            (fmt_string, calls)
         }
         Fields::Unnamed(fields) => {
             let mut fmt_string = name_str.to_string();
@@ -61,18 +59,22 @@ pub(crate) fn format_bits(item: TokenStream) -> TokenStream {
             }
 
             fmt_string.push_str(")");
-
-            quote! {
-                ::defmt::write!(fmt, #fmt_string, #(#calls)*)
-            }
+            (fmt_string, calls)
         }
         Fields::Unit => todo!("this is a unit struct, which is not supported right now"),
     };
 
+    let mod_name = Ident::new(&format!("__impl_defmt_{name}"), Span::call_site());
+
     quote! {
-        impl ::defmt::Format for #name {
-            fn format(&self, fmt: ::defmt::Formatter) {
-                #fmt_impl
+        mod #mod_name {
+            use bilge_defmt::defmt;
+            use super::#name;
+
+            impl ::bilge_defmt::defmt::Format for #name {
+                fn format(&self, fmt: defmt::Formatter) {
+                    defmt::write!(fmt, #fmt_string, #(#calls)*);
+                }
             }
         }
     }

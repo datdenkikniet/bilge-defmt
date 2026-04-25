@@ -12,3 +12,5 @@ readme = "README.md"
 
 [dependencies]
 bilge-defmt-impl = { version = "0.1.0", path = "./bilge-defmt-impl" }
+defmt = "1"
+arbitrary-int = { version = "2", features = [ "defmt" ]}

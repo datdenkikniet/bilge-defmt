@@ -2,18 +2,9 @@
 
 ## Usage
 
-To use this crate, update your `Cargo.toml`:
+To use this crate, add the dependency to your `Cargo.toml`:
 
 ```toml
-# Enable `defmt` formatting for `arbitrary-int`
-[dependencies.arbitrary-int]
-version = "2.0.0" # This version should match what `bilge` is using
-features = [ "defmt" ]
-
-# Add defmt dependency
-[dependencies.defmt]
-version = "1"
-
 [dependencies.bilge-defmt]
 version = "0.1.0"
 ```
