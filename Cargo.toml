@@ -1,6 +1,6 @@
 [package]
 name = "bilge-defmt"
-version = "0.1.0-pre"
+version = "0.1.0"
 edition = "2024"
 authors = ["Johannes Cornelis Draaijer <jcdra1@gmail.com>"]
 license = "MIT OR Apache-2.0"
@@ -11,4 +11,4 @@ categories = ["embedded", "no-std"]
 readme = "README.md"
 
 [dependencies]
-bilge-defmt-impl = { version = "0.1.0-pre", path = "./bilge-defmt-impl" }
+bilge-defmt-impl = { version = "0.1.0", path = "./bilge-defmt-impl" }

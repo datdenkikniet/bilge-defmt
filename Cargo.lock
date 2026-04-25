@@ -4,14 +4,14 @@ version = 4
 
 [[package]]
 name = "bilge-defmt"
-version = "0.1.0-pre"
+version = "0.1.0"
 dependencies = [
  "bilge-defmt-impl",
 ]
 
 [[package]]
 name = "bilge-defmt-impl"
-version = "0.1.0-pre"
+version = "0.1.0"
 dependencies = [
  "proc-macro-error2",
  "proc-macro2",

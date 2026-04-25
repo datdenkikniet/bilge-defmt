@@ -1,7 +1,13 @@
 [package]
 name = "bilge-defmt-impl"
-version = "0.1.0-pre"
+version = "0.1.0"
 edition = "2024"
+authors = ["Johannes Cornelis Draaijer <jcdra1@gmail.com>"]
+license = "MIT OR Apache-2.0"
+description = "Proc-macro implementation for bilge-defmt. See bilge-defmt for more information"
+homepage = "https://github.com/datdenkikniet/bilge-defmt"
+keywords = ["bilge", "defmt"]
+categories = ["embedded", "no-std"]
 
 [lib]
 proc-macro = true
