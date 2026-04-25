@@ -13,7 +13,7 @@ dependencies = [
 
 [[package]]
 name = "bilge-defmt"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "arbitrary-int",
  "bilge-defmt-impl",
@@ -22,7 +22,7 @@ dependencies = [
 
 [[package]]
 name = "bilge-defmt-impl"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "proc-macro-error2",
  "proc-macro2",
