@@ -76,7 +76,6 @@ dependencies = [
  "manyhow-macros",
  "proc-macro2",
  "quote",
- "syn 3.0.4",
 ]
 
 [[package]]

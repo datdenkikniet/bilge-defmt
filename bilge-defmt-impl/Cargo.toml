@@ -16,4 +16,6 @@ proc-macro = true
 syn = { version = "2.0", features = ["full"] }
 quote = "1.0"
 proc-macro2 = "1.0"
-manyhow = "0.13.0"
+# WARN: do _not_ activate `syn2` or `syn3` features: they are mutually
+# exclusive. See: https://github.com/ModProg/manyhow/issues/28
+manyhow = { version = "0.13.0", default-features = false, features = [ "macros" ] }
