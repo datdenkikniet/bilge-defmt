@@ -1,15 +1,14 @@
-use proc_macro_error2::abort_call_site;
 use proc_macro2::{Span, TokenStream};
 use quote::quote;
 use syn::{Data, DeriveInput, Fields, Ident};
 
-pub(crate) fn format_bits(item: TokenStream) -> TokenStream {
+pub(crate) fn format_bits(item: TokenStream) -> manyhow::Result<TokenStream> {
     let derive_input: DeriveInput = syn::parse2(item).unwrap_or_else(|_| unreachable!());
     let name = &derive_input.ident;
     let name_str = name.to_string();
     let struct_data = match derive_input.data {
         Data::Struct(s) => s,
-        Data::Enum(_) => abort_call_site!("use derive(defmt::Format) for enums"),
+        Data::Enum(_) => manyhow::bail!("use derive(defmt::Format) for enums"),
         Data::Union(_) => unreachable!(),
     };
 
@@ -66,7 +65,7 @@ pub(crate) fn format_bits(item: TokenStream) -> TokenStream {
 
     let mod_name = Ident::new(&format!("__impl_defmt_{name}"), Span::call_site());
 
-    quote! {
+    Ok(quote! {
         mod #mod_name {
             use bilge_defmt::defmt;
             use super::#name;
@@ -77,5 +76,5 @@ pub(crate) fn format_bits(item: TokenStream) -> TokenStream {
                 }
             }
         }
-    }
+    })
 }
